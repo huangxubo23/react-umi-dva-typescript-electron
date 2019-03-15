@@ -5,7 +5,8 @@ extends:
 jsRules:
 rules:
   eofline: true
-  no-console: false
+  no-console: true
   no-construct: true
   no-debugger: true
   no-reference: true
+  no-var-keyword: true
