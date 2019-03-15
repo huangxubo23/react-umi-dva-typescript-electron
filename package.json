@@ -15,7 +15,6 @@
     "asar": false
   },
   "scripts": {
-    "lint": "tslint \"src/**/*.ts\" \" src/**/*.tsx\"",
     "start": "electron app/dist/main/main",
     "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
     "dev:main": "ESLINT=none BROWSER=none COMPRESS=none roadhog build -w",
@@ -26,7 +25,10 @@
     "pack": "npm run build && npm run rebuild && build",
     "pack:dir": "npm run build && npm run rebuild && build --dir",
     "pack:dirOnly": "build --dir",
-    "rebuild": "electron-rebuild -m ./app"
+    "rebuild": "electron-rebuild -m ./app",
+    "lint": "npm run lint:ts && npm run lint:style",
+    "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "lint:style": "stylelint \"src/**/*.less\" --syntax less"
   },
   "devDependencies": {
     "@babel/runtime": "^7.0.0-beta.49",
@@ -35,8 +37,12 @@
     "electron-builder": "^20.15.1",
     "electron-debug": "^2.0.0",
     "electron-rebuild": "^1.7.3",
+    "prettier": "^1.16.4",
     "roadhog": "^2.4.2",
     "slash": "^2.0.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-prettier": "^5.0.0",
+    "stylelint-config-standard": "^18.2.0",
     "tslint": "^5.14.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
