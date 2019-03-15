@@ -31,12 +31,12 @@
     "lint:style": "stylelint \"src/**/*.less\" --syntax less"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.0.0-beta.49",
-    "concurrently": "^3.5.1",
-    "electron": "^2.0.2",
-    "electron-builder": "^20.15.1",
-    "electron-debug": "^2.0.0",
-    "electron-rebuild": "^1.7.3",
+    "@babel/runtime": "^7.3.4",
+    "concurrently": "^4.1.0",
+    "electron": "^4.1.0",
+    "electron-builder": "^20.39.0",
+    "electron-debug": "^2.1.0",
+    "electron-rebuild": "^1.8.4",
     "prettier": "^1.16.4",
     "roadhog": "^2.4.2",
     "slash": "^2.0.0",
