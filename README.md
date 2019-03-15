@@ -1,6 +1,6 @@
-# umi-example-electron
+# react-umi-dva-typescript-electron
 
-Electron example with [umi](https://github.com/umijs/umi/) and [dva](https://github.com/dvajs/dva/).
+使用[react](https://github.com/facebook/react)、[umi](https://github.com/umijs/umi/)、[dva](https://github.com/dvajs/dva/)、[TypeScript](https://github.com/Microsoft/TypeScript)和[electron](https://github.com/electron/electron)构建桌面应用。
 
 ## 参考
 
@@ -14,7 +14,7 @@ Electron example with [umi](https://github.com/umijs/umi/) and [dva](https://git
 
 ```bash
 # 安装依赖
-$ npm i
+$ npm i 或 yarn install
 
 # 安装 app 目录依赖（注意这里不要用 cnpm 或 tnpm，pack 时会丢失 node_modules）
 $ cd app
@@ -30,6 +30,10 @@ $ npm run rebuild
 ```bash
 $ npm run dev
 ```
+启动electron应用
+```bash
+$ npm start
+```
 
 你也可以分开运行 `npm run dev:renderer` 和 `npm run dev:main`。
 
@@ -44,10 +48,6 @@ $ npm run pack:dir
 # 不重复做 webpack 层的构建和 rebuild，本地验证打包流程用
 $ npm run pack:dirOnly
 ```
-
-## 截图
-
-<img src="https://gw.alipayobjects.com/zos/rmsportal/EHDQdNKjUrVxTGfBTMVv.png" width="600" />
 
 ## 目录结构
 
