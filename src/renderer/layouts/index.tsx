@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import router from 'umi/router';
 import { Button } from 'antd';
+import { ipcRenderer } from 'electron';
 
 import styles from './index.less';
 
@@ -11,16 +12,25 @@ export interface BasicLayoutProps extends React.Props<any> {
   location?: Location;
 }
 
-const BasicLayout: BasicLayoutComponent<BasicLayoutProps> = props => {
-  return (
-    <div className={styles.container}>
+class BasicLayout extends PureComponent {
+  componentDidMount() {
+    ipcRenderer.on('router-goforward', (event) => {
+      router.go(1);
+    });
+    ipcRenderer.on('router-goback', (event) => {
+      router.goBack();
+    });
+  }
+  render() {
+    return (
+      <div className={styles.container}>
       <div className={styles.header}>
-
         MMG Electron Demo
       </div>
-      {props.children}
+      {this.props.children}
     </div>
-  );
-};
+    )
+  }
+}
 
 export default BasicLayout;

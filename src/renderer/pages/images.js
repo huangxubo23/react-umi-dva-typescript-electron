@@ -6,8 +6,6 @@ import { PureComponent } from 'react';
 import { Button, Upload, message, Icon } from 'antd';
 const fs = remote.require('fs');
 const {getCurrentWindow, globalShortcut} = require('electron').remote;
-// const getCurrentWindow = remote.require('getCurrentWindow');
-// const globalShortcut = remote.require('globalShortcut');
 
 const styles = {
   container: {
@@ -42,24 +40,11 @@ const styles = {
 class Index extends PureComponent {
   constructor(props) {
     super(props);
-    // globalShortcut.register('F5', this.refreshPage);
-    // globalShortcut.register('CommandOrControl+R', this.refreshPage);
-    // this.state = {
-    //   images: [],
-    //   inputImages: [],
-    //   uploadImages: [],
-    // };
   }
   componentDidMount() {
     ipcRenderer.on('selected-directory', (event, filepaths) => {
       console.log('==selected-directory==', event, filepaths);
       const img = `data:image/png;base64,${fs.readFileSync(filepaths[0]).toString('base64')}`;
-      // this.setState({
-      //   images: [
-      //     ...this.state.images,
-      //     img,
-      //   ]
-      // });
       const { dispatch, images } = this.props;
       dispatch({
         type: 'images/set',
@@ -68,14 +53,6 @@ class Index extends PureComponent {
         }
       });
     });
-    ipcRenderer.on('router-goback', (event) => {
-      router.goBack();
-    });
-  }
-
-  componentWillUnmount() {
-    // globalShortcut.unregister('F5', this.refreshPage);
-    // globalShortcut.unregister('CommandOrControl+R', this.refreshPage);
   }
 
   handleOpenFileDialog = () => {
@@ -138,9 +115,6 @@ class Index extends PureComponent {
     console.info('==handleFileChange==', event.target.files);
     const files = [...event.target.files];
     const inputImages = files.map(file => this.getObjectURL(file));
-    // this.setState({
-    //   inputImages,
-    // })
     const { dispatch } = this.props;
       dispatch({
         type: 'images/set',
@@ -156,7 +130,7 @@ class Index extends PureComponent {
 
   render() {
     const { images, inputImages, uploadImages  } = this.props;
- 
+
     return (
       <div style={styles.container}>
         <Button onClick={() => router.goBack()}>返回</Button>

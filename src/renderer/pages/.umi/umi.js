@@ -1,44 +1,44 @@
-import './polyfills';
-
-import '@tmp/initHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createHistory from 'umi/_createHistory';
+import FastClick from 'umi-fastclick';
 
 
-// runtime plugins
-window.g_plugins = require('umi/_runtimePlugin');
-window.g_plugins.init({
-  validKeys: ['patchRoutes','render','rootContainer','modifyRouteProps','onRouteChange','dva',],
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+    FastClick.attach(document.body);
+  },
+  false,
+);
+
+// create history
+window.g_history = createHistory({
+  basename: window.routerBase,
 });
-window.g_plugins.use(require('../../../../node_modules/umi-plugin-dva/lib/runtime'));
 
-require('@tmp/initDva');
 
 // render
-let oldRender = () => {
-  const rootContainer = window.g_plugins.apply('rootContainer', {
-    initialValue: React.createElement(require('./router').default),
-  });
-  ReactDOM.render(
-    rootContainer,
-    document.getElementById('root'),
-  );
-};
-const render = window.g_plugins.compose('render', { initialValue: oldRender });
-
-const moduleBeforeRendererPromises = [];
-
-Promise.all(moduleBeforeRendererPromises).then(() => {
-  render();
-}).catch((err) => {
-  window.console && window.console.error(err);
-});
-
-
+function render() {
+  const DvaContainer = require('./DvaContainer').default;
+ReactDOM.render(React.createElement(
+  DvaContainer,
+  null,
+  React.createElement(require('./router').default)
+), document.getElementById('root'));
+}
+render();
 
 // hot module replacement
 if (module.hot) {
   module.hot.accept('./router', () => {
-    oldRender();
+    render();
   });
 }
+
+require('/Users/harryhuang/MMG/demo/react-umi-dva-typescript-electron/src/renderer/global.less');
+// Enable service worker
+if (process.env.NODE_ENV === 'production') {
+  require('./registerServiceWorker');
+}
+      

@@ -10,7 +10,7 @@ function getTemplate() {
         { role: 'hideothers', label: '隐藏其它应用' },
         { role: 'unhide', label: '显示全部' },
         { type: 'separator' },
-        { role: 'quit', label: '退出' },
+        { role: 'quit', label: '退出', accelerator: "Command+Q" },
       ],
     },
     {
@@ -26,9 +26,12 @@ function getTemplate() {
           click: (item, focusedWindow) => {
             focusedWindow.webContents.send('router-goforward');
           }
-        }, {
-          type: 'separator'
-        }, {
+        },
+        { type: 'separator' },
+        { label: "复制", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+        { label: "粘贴", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+        { type: 'separator' },
+        ,{
           label: '弹框',
           click: (item, focusedWindow) => {
             console.info(item, focusedWindow);

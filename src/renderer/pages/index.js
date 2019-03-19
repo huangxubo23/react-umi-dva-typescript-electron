@@ -42,33 +42,6 @@ class Index extends PureComponent {
     super(props);
     // globalShortcut.register('F5', this.refreshPage);
     // globalShortcut.register('CommandOrControl+R', this.refreshPage);
-    // this.state = {
-    //   images: [],
-    //   inputImages: [],
-    //   uploadImages: [],
-    // };
-  }
-  componentDidMount() {
-    ipcRenderer.on('selected-directory', (event, filepaths) => {
-      console.log('==selected-directory==', event, filepaths);
-      const img = `data:image/png;base64,${fs.readFileSync(filepaths[0]).toString('base64')}`;
-      // this.setState({
-      //   images: [
-      //     ...this.state.images,
-      //     img,
-      //   ]
-      // });
-      const { dispatch, images } = this.props;
-      dispatch({
-        type: 'images/set',
-        payload: {
-          images: [ ...images, img ],
-        }
-      });
-    });
-    ipcRenderer.on('router-goforward', (event) => {
-      router.go(1);
-    });
   }
 
   componentWillUnmount() {
@@ -104,10 +77,6 @@ class Index extends PureComponent {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       this.getBase64(info.file.originFileObj, (imageUrl) => {
-        // this.setState({
-        //   uploadImages: [ ...this.state.uploadImages, imageUrl ],
-        //   loading: false,
-        // })
         const { dispatch, uploadImages } = this.props;
         dispatch({
           type: 'images/set',
@@ -133,12 +102,8 @@ class Index extends PureComponent {
 }
 
   handleFileChange = (event) => {
-    console.info('==handleFileChange==', event.target.files);
     const files = [...event.target.files];
     const inputImages = files.map(file => this.getObjectURL(file));
-    // this.setState({
-    //   inputImages,
-    // })
     const { dispatch } = this.props;
       dispatch({
         type: 'images/set',

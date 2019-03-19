@@ -8,9 +8,9 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": ".",
-    // "paths": {
-    //   "@/*": ["pages/*"]
-    // },
+    "paths": {
+      "@/*": ["pages/*"]
+    },
     "allowSyntheticDefaultImports": true
   }
 }
